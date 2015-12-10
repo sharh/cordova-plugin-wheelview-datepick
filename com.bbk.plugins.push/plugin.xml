@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.bbk.plugins.push" version="0.001" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>YunPush</name>
+    <platform name="android">
+
+
+	    <js-module name="YunPush" src="www/YunPush.js">
+	        <clobbers target="YunPush" />
+	    </js-module>
+    	<config-file target="res/xml/config.xml" parent="/*">
+            <feature name="YunPush">
+                <param name="android-package" value="com.bbk.plugins.push.YunPush"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.WAKE_LOCK" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.VIBRATE" />
+			<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+
+			<!-- 位置相关权限，不是必须添加 -->
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+        	<service android:name="io.yunba.android.core.YunBaService"> </service>
+
+        	<receiver android:name="io.yunba.android.core.YunBaReceiver">
+			    <intent-filter>
+			        <action android:name="android.intent.action.USER_PRESENT" />
+			        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			    </intent-filter>
+			</receiver>
+
+			<receiver android:name="com.bbk.plugins.push.YunPushReceiver">
+		        <intent-filter>
+		        <action android:name="io.yunba.android.MESSAGE_RECEIVED_ACTION" />
+		        <category android:name="com.eebbk.hw.teacher" />
+		        </intent-filter>
+		    </receiver>
+			<meta-data android:name="YUNBA_APPKEY" android:value="5601ffa44a481fa955f39784" />
+        </config-file>
+		<!-- 源文件 -->
+        <source-file src="src/android/YunPush.java" target-dir="src/com/bbk/plugins/push" />
+        <source-file src="src/android/YunPushReceiver.java" target-dir="src/com/bbk/plugins/push" />
+        <source-file src="src/android/libs/android-support-v4.jar" target-dir="libs" />
+        <source-file src="src/android/libs/yunba-sdk-release1.4.5.jar" target-dir="libs" />
+    </platform>
+</plugin>
