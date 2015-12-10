@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<plugin id="com.bbk.plugins.datepickerhelpler" version="0.001" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>DatePickerHelpler</name>
+    <js-module name="DatePickerHelpler" src="www/DatePickerHelpler.js">
+        <clobbers target="DatePickerHelpler" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="DatePickerHelpler">
+                <param name="android-package" value="com.bbk.plugins.datepickerhelpler.DatePickerHelpler" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/DatePickerHelpler.java" target-dir="src/com/bbk/plugins/datepickerhelpler" />
+        <source-file src="src/android/DateTimePickDialogHelper.java" target-dir="src/com/bbk/plugins/datepickerhelpler" />
+
+        <!-- kankan widget -->
+        <!-- there is a conflict in WheelView.java about R, so we make the kankan widgets as a src target, other  then a libs -->
+        <source-file src="src/android/libs/wheel.jar" target-dir="libs"/>
+
+
+        <source-file src="src/android/res/drawable/layout_bg.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/wheel_bg.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/wheel_val.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/usa.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ukraine.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/france.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/canada.png" target-dir="res/drawable"/>
+        <source-file src="src/android/res/layout/date_layout.xml" target-dir="res/layout"/>
+    </platform>
+</plugin>
